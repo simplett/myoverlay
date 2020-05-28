@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+const overlay = function(data) {
+	var example;
+    if(data.color){
+        this.color = data.color
+    } else {
+        this.color = 'rgba(76,76,76,0.3)'
+    }
+    if(data.imgurl){
+        this.imgurl = data.imgurl
+    } else {
+        this.imgurl = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2228985605,2720940451&fm=26&gp=0.jpg'
+    }  
+    if(data.color){
+        this.loadingurl = data.loadingurl
+    } else {
+        this.loadingurl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3028672281,4280382655&fm=26&gp=0.jpg'
+    }
+	this.top = '0px';
+	this.example = '';
+}
+overlay.prototype.show = () => {
+	var windowsHeight = window.innerHeight;
+	var myoverlay = document.createElement('div');
+	myoverlay.style.height = windowsHeight + 'px';
+	myoverlay.style.width = '100%';
+	myoverlay.style.position = 'absolute';
+	myoverlay.style.zIndex = 9999900;
+	myoverlay.style.borderRadius = '5px';
+	myoverlay.style.top = '0px';
+	myoverlay.style.left = '0px';
+	myoverlay.style.right = '0px';
+	myoverlay.style.bottom = '0px';
+	// myoverlay.style.border = '5px solid red';
+	myoverlay.style.backgroundColor = this.color;
+    myoverlay.style.boxSizing='border-box'
+    myoverlay.style.display = 'flex';
+    myoverlay.style.justifyContent = 'center'
+    myoverlay.style.alignItems='center'
+	document.body.appendChild(myoverlay);   
+	this.example = myoverlay;
+    return myoverlay
+}
+overlay.prototype.hide = () => {
+	document.body.removeChild(this.example);
+}
+overlay.prototype.showloading = function() {
+    try{
+        var myexample = this.show()
+    }catch(e){
+        var myexample = null
+    }
+	if (myexample) {
+		var loading = document.createElement("img");
+		loading.setAttribute('src',this.loadingurl)
+        // document.body.appendChild(loading)
+        loading.style.borderRadius='6px'
+        myexample.appendChild(loading)
+        console.log('kjlkjljl')
+	} else {
+		console.log('您没有创建实例')
+	}
+}
+overlay.prototype.showimg = function() {
+    try{
+        var myexample = this.show()
+    }catch(e){
+        var myexample = null
+    }
+	if (myexample) {
+		var loading = document.createElement("img");
+		loading.setAttribute('src',this.imgurl)
+        // document.body.appendChild(loading)
+        loading.style.borderRadius='6px'
+        myexample.appendChild(loading)
+        console.log('kjlkjljl')
+	} else {
+		console.log('您没有创建实例')
+	}
+}
+    var demo = new overlay({})
+    // demo.show()
+    // setTimeout(() => {
+    //     demo.showloading()  
+    // }, 3000);
+// demo.showloading()
+demo.showimg()
+</script>
+
+</html>
